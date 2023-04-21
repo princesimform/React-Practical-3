@@ -1,0 +1,182 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+:root {
+  line-height: 1.5;
+  letter-spacing: 1px;
+  font-weight: 400;
+  background-color: #242424;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  --background-color: #f0efe9;
+  --active-font-color: #000000;
+  --inactive-font-color: #e1e2e6;
+  --font-color: #626574;
+  --primary-color: #50e3a4;
+  --secondary-color: #f0efe9;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--background-color);
+  font-family: "Dongle", sans-serif;
+}
+
+p {
+  padding: 0;
+  margin: 0;
+}
+/* Layout  */
+.todo-app-container {
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(140, 136, 140, 1);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(140, 136, 140, 1);
+  box-shadow: 0px 0px 10px 0px rgba(140, 136, 140, 1);
+  padding: 2rem;
+  background-color: white;
+}
+.time-stemp {
+  display: flex;
+  justify-content: space-between;
+}
+
+.date-stemp {
+  display: flex;
+}
+
+.date {
+  margin: auto 0;
+  text-transform: uppercase;
+}
+
+.date p {
+  font-size: 50px;
+  font-weight: 500;
+}
+.month {
+  font-weight: 600;
+  font-size: 16px;
+}
+.month-year {
+  margin: auto 0;
+  text-transform: uppercase;
+}
+.day {
+  margin: auto 0;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.year {
+  font-size: 16px;
+}
+
+.day p {
+  font-size: 14px;
+}
+
+/* TodoList */
+
+.item {
+  display: flex;
+  margin: 1.3rem 0;
+  justify-content: space-between;
+}
+
+.item p {
+  text-align: initial;
+  font-size: 16px;
+}
+
+.item .item-complete,
+.item .add {
+  margin: 0 0.5rem;
+}
+.item-complete-btn {
+  cursor: pointer;
+  width: 28px;
+  display: block;
+  border-radius: 50%;
+  height: 28px;
+  /* padding: 0.6em 1.2em; */
+  background: url(/src/assets/blanck_icon.png);
+  background-repeat: no-repeat;
+  background-origin: content-box;
+  background-position: center;
+  /* background-attachment: initial; */
+  background-size: cover;
+}
+
+.todo-name {
+  margin: auto auto auto 0;
+  text-align: left;
+  padding-right: 3rem;
+}
+
+.item-completed .todo-name p {
+  color: var(--inactive-font-color);
+}
+
+.item-completed .item-complete-btn,
+.add .add-btn {
+  background: url("./assets/checkbox.ico");
+  background-origin: revert;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.add-task-icon {
+  width: 60px;
+  height: 60px;
+  background-color: var(--primary-color);
+  display: flex;
+  position: absolute;
+  margin-left: 7.7rem;
+  border-radius: 50%;
+  transition: all ease-in-out 0.2s;
+}
+
+.add-task span svg {
+  margin: auto;
+  opacity: 0.6;
+  color: var(--font-color);
+  font-size: 25px;
+}
+
+.add-task .add-task-icon:hover {
+  -webkit-box-shadow: 0px 0px 10px 0px var(--primary-color);
+  -moz-box-shadow: 0px 0px 10px 0px var(--primary-color);
+  box-shadow: 0px 0px 10px 0px var(--primary-color);
+}
+
+.todo-list {
+  max-height: 25rem;
+  overflow: auto;
+}
+
+.add-task {
+  cursor: pointer;
+}
+
+.date,
+.month,
+.year,
+.day,
+.todo-name p {
+  color: var(--active-font-color);
+}
+@media only screen and (max-width: 400px) {
+  .add-task-icon {
+    margin-left: 6rem;
+  }
+}
