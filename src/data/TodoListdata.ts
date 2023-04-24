@@ -36,6 +36,16 @@ const TodoListdata: TodoListdataType[] = [
     data: "Go For Walk",
     isCompleted: false,
   },
+  {
+    id: 78,
+    data: "Go For Walk",
+    isCompleted: false,
+  },
+  {
+    id: 74,
+    data: "Go For Walk",
+    isCompleted: false,
+  }
 ];
 
 export default TodoListdata;

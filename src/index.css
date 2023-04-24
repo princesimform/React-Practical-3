@@ -37,12 +37,17 @@ p {
   padding: 0;
   margin: 0;
 }
+
+::-webkit-scrollbar {
+  width: 0px;
+}
+
 /* Layout  */
 .todo-app-container {
   -webkit-box-shadow: 0px 0px 10px 0px rgba(140, 136, 140, 1);
   -moz-box-shadow: 0px 0px 10px 0px rgba(140, 136, 140, 1);
   box-shadow: 0px 0px 10px 0px rgba(140, 136, 140, 1);
-  padding: 2rem;
+  padding: 2rem 1.5rem 1rem 1.5rem;
   background-color: white;
 }
 .time-stemp {
@@ -88,7 +93,7 @@ p {
 
 .item {
   display: flex;
-  margin: 1.3rem 0;
+  padding: 1rem 0;
   justify-content: space-between;
 }
 
@@ -142,6 +147,7 @@ p {
   display: flex;
   position: absolute;
   margin-left: 7.7rem;
+  margin-top: -1rem;
   border-radius: 50%;
   transition: all ease-in-out 0.2s;
 }
@@ -160,12 +166,39 @@ p {
 }
 
 .todo-list {
-  max-height: 25rem;
+  max-height: 28rem;
+  padding: 1rem;
   overflow: auto;
+  display: grid;
 }
 
 .add-task {
   cursor: pointer;
+}
+
+.add-task-icon-section {
+  margin-top: 3.4rem;
+}
+
+.input-box {
+  margin-top: 1.5rem;
+  /* margin-bottom: 0.8rem; */
+}
+
+.input-box input {
+  padding: 0.5rem;
+  width: -webkit-fill-available;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 1px 6px rgb(140 136 140);
+}
+
+.input-box input:focus-visible {
+  border: none !important;
+  outline: none;
+}
+.todo-list-overflow {
+  box-shadow: 0px -10px 20px -20px gray inset;
 }
 
 .date,
