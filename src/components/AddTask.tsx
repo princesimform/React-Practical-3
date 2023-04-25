@@ -1,13 +1,14 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { TodoItemObjectType } from "../Interface/TodoItem";
 import { TodoContext } from "../context/TodoContext";
 import { TodoContextType } from "../Interface/TodoContextType";
 
-
 function AddTask() {
   const { addItem, isInvalidData } = useContext(TodoContext) as TodoContextType;
+  const InputField = useRef<HTMLInputElement>(null)!;
+
   const [isInputActive, setIsInputActive] = useState(false);
   const [todoInput, setTodoInput] = useState("");
   useEffect(() => {
@@ -39,6 +40,13 @@ function AddTask() {
     }
   }
 
+  const activeInput = () => {
+    setIsInputActive(true);
+    setTodoInput("");
+    if (InputField.current != null) {
+      InputField.current.focus();
+    }
+  };
   return (
     <>
       {isInputActive ? (
@@ -52,6 +60,7 @@ function AddTask() {
               onChange={(e) => setTodoInput(e.target.value)}
               onKeyDown={submitTask}
               placeholder='Enter Your Task'
+              ref={InputField}
             />
             {isInvalidData ? (
               <p className='invalid-data-text'>Invalid Data</p>
@@ -63,10 +72,7 @@ function AddTask() {
       ) : (
         <div className='add-task add-task-btn'>
           <div className='add-task-icon-section'>
-            <span
-              onClick={() => setIsInputActive(true)}
-              className='add-task-icon'
-            >
+            <span onClick={activeInput} className='add-task-icon'>
               <FontAwesomeIcon icon={faPlus} />
             </span>
           </div>

@@ -15,8 +15,6 @@ const TodoProvider = ({ children }: ChildrenNode) => {
       console.log(today);
       const TodayList = JSON.parse(localStorage.getItem("todo")!);
       TodayList.filter((item: any) => item.date == today).sort(sortTodo());
-      console.log(TodayList);
-
       setTodoList(TodayList);
       localStorage.setItem("todo", JSON.stringify(TodayList));
     } else {
@@ -35,7 +33,7 @@ const TodoProvider = ({ children }: ChildrenNode) => {
   }
 
   const addItem = (newTodoItem: TodoItemObjectType) => {
-    if (newTodoItem.item == "") {
+    if (newTodoItem.item.trim() == "") {
       setIsInvalidData(true);
       setTimeout(() => setIsInvalidData(false), 2000);
     } else {
