@@ -2,7 +2,7 @@ import React, { useState, ReactNode, useEffect } from "react";
 import { TodoItemObjectType } from "./../Interface/TodoItem";
 import { ChildrenNode } from "../Interface/ChildrenNode";
 import { TodoContextType } from "../Interface/TodoContextType";
-
+import "materialize-css";
 export const TodoContext = React.createContext<TodoContextType | null>(null);
 
 const TodoProvider = ({ children }: ChildrenNode) => {
@@ -12,7 +12,6 @@ const TodoProvider = ({ children }: ChildrenNode) => {
   useEffect(() => {
     if (localStorage.getItem("todo") != null) {
       const today = new Date().toLocaleDateString("en-US");
-      console.log(today);
       const TodayList = JSON.parse(localStorage.getItem("todo")!);
       TodayList.filter((item: any) => item.date == today).sort(sortTodo());
       setTodoList(TodayList);
@@ -57,9 +56,18 @@ const TodoProvider = ({ children }: ChildrenNode) => {
     setTodoList([...tempList]);
   };
 
+  const deleteItem = (id: number) => {
+    const tempList = todoList;
+    const updateItemIndex = tempList.findIndex((item) => item.id == id);
+    tempList.splice(updateItemIndex, 1);
+    console.log(tempList);
+    tempList.sort(sortTodo());
+    localStorage.setItem("todo", JSON.stringify(tempList));
+    setTodoList([...tempList]);
+  };
   return (
     <TodoContext.Provider
-      value={{ todoList, addItem, updateItem, isInvalidData }}
+      value={{ todoList, addItem, updateItem, isInvalidData, deleteItem }}
     >
       {children}
     </TodoContext.Provider>

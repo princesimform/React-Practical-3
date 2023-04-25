@@ -1,4 +1,5 @@
 import "./App.css";
+import "react-tooltip/dist/react-tooltip.css";
 import Header from "./components/Header";
 import TodoList from "./components/TodoList";
 import AddTask from "./components/AddTask";

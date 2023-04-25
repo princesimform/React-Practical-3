@@ -4,4 +4,5 @@ export type TodoContextType = {
   addItem: (newTodoItem: TodoItemObjectType) => void;
   updateItem: (id: number) => void;
   isInvalidData: boolean;
+  deleteItem: (id: number) => void;
 };

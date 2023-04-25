@@ -1,9 +1,15 @@
 // Class Component
-import React, { Component } from "react";
+import React, { Component, useEffect, useRef } from "react";
 import { TodoItemProps } from "../Interface/TodoItemProps";
 import { motion } from "framer-motion";
-
-function TodoItem({ isCompleted, id, data, updateItem }: TodoItemProps) {
+import { Tooltip } from "react-tooltip";
+function TodoItem({
+  isCompleted,
+  id,
+  data,
+  updateItem,
+  deleteItem,
+}: TodoItemProps) {
   const variants = {
     open: {
       y: 0,
@@ -20,6 +26,7 @@ function TodoItem({ isCompleted, id, data, updateItem }: TodoItemProps) {
       },
     },
   };
+
   return (
     <>
       <motion.div
@@ -28,10 +35,11 @@ function TodoItem({ isCompleted, id, data, updateItem }: TodoItemProps) {
         whileTap={{ scale: 0.95 }}
         className={"item" + `${isCompleted ? " item-completed" : ""}`}
         onClick={() => updateItem(id)}
+        data-tooltip-content='Hello world!'
       >
         <div className='todo-name'>
           <p>
-            <abbr title={data}>{data}</abbr> 
+            <abbr title={data}>{data}</abbr>
           </p>
         </div>
         <motion.div
@@ -42,9 +50,18 @@ function TodoItem({ isCompleted, id, data, updateItem }: TodoItemProps) {
             damping: 20,
           }}
         >
-          <span className='item-complete-btn'></span>
+          <span
+            className='item-complete-btn'
+            data-tooltip-content={isCompleted ? "Right Click To Delete Task" : ""}
+            data-tooltip-id={isCompleted ? "tooltip-completed" : ""}
+            onContextMenu={() => {
+              isCompleted && deleteItem(id);
+            }}
+          ></span>
         </motion.div>
       </motion.div>
+
+      <Tooltip id='tooltip-completed' />
     </>
   );
 }

@@ -13,6 +13,7 @@ function AddTask() {
   const [todoInput, setTodoInput] = useState("");
   useEffect(() => {
     window.addEventListener("keydown", onKeyUp);
+
     return () => {
       window.removeEventListener("keydown", onKeyUp);
     };

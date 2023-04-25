@@ -5,7 +5,9 @@ import { motion } from "framer-motion";
 import TodoItem from "./TodoItem";
 
 function TodoList() {
-  const { todoList, updateItem } = useContext(TodoContext) as TodoContextType;
+  const { todoList, updateItem, deleteItem } = useContext(
+    TodoContext
+  ) as TodoContextType;
 
   const todoListContainer = useRef<HTMLDivElement>(null)!;
 
@@ -55,6 +57,7 @@ function TodoList() {
             data={item.item}
             isCompleted={item.isCompleted}
             updateItem={updateItem}
+            deleteItem={deleteItem}
           />
         );
       })}
