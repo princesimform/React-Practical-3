@@ -49,6 +49,7 @@ p {
   box-shadow: 0px 0px 10px 0px rgba(140, 136, 140, 1);
   padding: 2rem 1.5rem 1rem 1.5rem;
   background-color: white;
+  min-width: 22rem;
 }
 .time-stemp {
   display: flex;
@@ -95,6 +96,7 @@ p {
   display: flex;
   padding: 1rem 0;
   justify-content: space-between;
+  height: fit-content;
 }
 
 .item p {
@@ -145,11 +147,12 @@ p {
   height: 60px;
   background-color: var(--primary-color);
   display: flex;
-  position: absolute;
+  /* position: absolute; */
   margin-left: 7.7rem;
   margin-top: -1rem;
   border-radius: 50%;
   transition: all ease-in-out 0.2s;
+  margin: 0 auto;
 }
 
 .add-task span svg {
@@ -166,14 +169,17 @@ p {
 }
 
 .todo-list {
-  max-height: 28rem;
+  max-height: 25rem;
+  min-height: 25rem;
   padding: 1rem;
   overflow: auto;
-  display: grid;
 }
 
 .add-task {
   cursor: pointer;
+}
+.add-task-btn {
+  margin-bottom: -45px;
 }
 
 .add-task-icon-section {
@@ -208,8 +214,39 @@ p {
 .todo-name p {
   color: var(--active-font-color);
 }
+
+.all-task-completed {
+  background-image: url("./assets/all_task_completed.png");
+  background-origin: revert;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: block;
+  height: 28rem;
+  margin: auto;
+  width: 17rem;
+}
+@media only screen and (max-width: 600px) {
+  .todo-app-container {
+    min-width: 17rem;
+  }
+}
 @media only screen and (max-width: 400px) {
   .add-task-icon {
     margin-left: 6rem;
   }
+
+  .todo-app-container {
+    min-width: 15rem;
+  }
+}
+
+/* Validation Style */
+
+.invalid-data {
+  box-shadow: 0px 1px 6px rgb(245, 125, 161) !important;
+}
+.invalid-data-text,
+.invalid-data::placeholder {
+  color: rgb(245, 125, 161);
 }
