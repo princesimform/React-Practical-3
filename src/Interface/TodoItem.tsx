@@ -1,5 +1,5 @@
 export interface TodoItemObjectType {
-  id: number;
+  id: string;
   createdAt: string;
   item: string;
   isCompleted: boolean;

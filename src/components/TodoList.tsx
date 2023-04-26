@@ -7,9 +7,7 @@ import { TodoItemObjectType } from "../Interface/TodoItem";
 
 function TodoList() {
   const { todoList, updateItem } = useContext(TodoContext) as TodoContextType;
-
   const todoListContainer = useRef<HTMLDivElement>(null)!;
-
   const variants = {
     open: {
       transition: { staggerChildren: 0.07, delayChildren: 0.2 },
@@ -18,23 +16,16 @@ function TodoList() {
       transition: { staggerChildren: 0.05, staggerDirection: -1 },
     },
   };
-
   useEffect(() => {
     if (null != todoListContainer.current) {
-      console.log(todoListContainer.current.clientHeight);
+      console.log(todoListContainer.current.scrollHeight);
 
-      if (todoListContainer.current.clientHeight > 432) {
+      if (todoListContainer.current.scrollHeight > 432) {
         todoListContainer.current.classList.value =
           "todo-list todo-list-overflow";
       } else {
         todoListContainer.current.classList.value = "todo-list";
       }
-    }
-    if (todoListContainer.current != null) {
-      todoListContainer.current.scrollTo(
-        0,
-        todoListContainer.current.scrollHeight
-      );
     }
   }, [todoList]);
 
@@ -47,17 +38,10 @@ function TodoList() {
       variants={variants}
       className='todo-list'
       ref={todoListContainer}
+      id='todo-list'
     >
-      {todoList.map((item: TodoItemObjectType) => {
-        return (
-          <TodoItem
-            key={item.id}
-            id={item.id}
-            data={item.item}
-            isCompleted={item.isCompleted}
-            updateItem={updateItem}
-          />
-        );
+      {todoList.map((todoItem: TodoItemObjectType) => {
+        return <TodoItem key={todoItem.id} todoItem={todoItem} />;
       })}
     </motion.div>
   );

@@ -8,9 +8,9 @@ import { TodoContextType } from "../Interface/TodoContextType";
 function AddTodo() {
   const { addItem, isInvalidData } = useContext(TodoContext) as TodoContextType;
   const InputField = useRef<HTMLInputElement>(null)!;
-
   const [isInputActive, setIsInputActive] = useState(false);
   const [todoInput, setTodoInput] = useState("");
+
   useEffect(() => {
     window.addEventListener("keydown", onKeyUp);
 
@@ -28,7 +28,7 @@ function AddTodo() {
     if (e.key == "Enter") {
       const date = new Date();
       let reqData: TodoItemObjectType = {
-        id: date.getUTCMilliseconds(),
+        id: Date.now().toString(36) + Math.random().toString(36).substr(2),
         createdAt: date.toLocaleDateString("en-US"),
         item: e.currentTarget.value,
         isCompleted: false,

@@ -1,9 +1,14 @@
 // Class Component
-import React, { Component, useEffect, useRef } from "react";
-import { TodoItemProps } from "../Interface/TodoItemProps";
+import React, { useContext, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Tooltip } from "react-tooltip";
-function TodoItem({ isCompleted, id, data, updateItem }: TodoItemProps) {
+import { TodoContext } from "../context/TodoContext";
+import { TodoContextType } from "../Interface/TodoContextType";
+import { TodoItemObjectType } from "../Interface/TodoItem";
+
+function TodoItem({ todoItem }: { todoItem: TodoItemObjectType }) {
+  const todoItemContainer = useRef<HTMLDivElement>(null)!;
+  const { updateItem } = useContext(TodoContext) as TodoContextType;
   const variants = {
     open: {
       y: 0,
@@ -24,17 +29,22 @@ function TodoItem({ isCompleted, id, data, updateItem }: TodoItemProps) {
   return (
     <>
       <motion.div
+        id={todoItem.id}
         variants={variants}
         whileHover={{ scale: 0.95 }}
         whileTap={{ scale: 0.95 }}
-        className={"item" + `${isCompleted ? " item-completed" : ""}`}
-        onClick={() => updateItem(id)}
-        data-tooltip-content={data}
-        data-tooltip-id='tooltip-data'
+        className={"item" + `${todoItem.isCompleted ? " item-completed" : ""}`}
+        onClick={() => {
+          updateItem(todoItem.id);
+        }}
+        ref={todoItemContainer}
       >
         <div className='todo-name'>
-          <p>
-            <abbr title={data}>{data}</abbr>
+          <p
+            data-tooltip-content={todoItem.item}
+            data-tooltip-id='tooltip-data'
+          >
+            {todoItem.item}
           </p>
         </div>
         <motion.div

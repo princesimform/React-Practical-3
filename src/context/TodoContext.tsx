@@ -45,13 +45,15 @@ const TodoProvider = ({ children }: ChildrenNode) => {
       try {
         localStorage.setItem("todo", JSON.stringify(newTodoList));
         setTodoList(newTodoList!);
+        const todoListDom = document.getElementById("todo-list");
+        todoListDom?.scrollTo(0, todoListDom.scrollHeight);
       } catch (error) {
         setIsInvalidData(true);
         setTimeout(() => setIsInvalidData(false), 2000);
       }
     }
   };
-  const updateItem = (id: number) => {
+  const updateItem = (id: string) => {
     const tempList = todoList;
     const updateItemIndex = tempList.findIndex((item) => item.id == id);
     tempList[updateItemIndex].isCompleted =
@@ -59,6 +61,8 @@ const TodoProvider = ({ children }: ChildrenNode) => {
     tempList.sort(sortTodo());
     localStorage.setItem("todo", JSON.stringify(tempList));
     setTodoList([...tempList]);
+    const todoListDom = document.getElementById("todo-list");
+    todoListDom?.scrollTo(todoListDom.scrollHeight, 0);
   };
 
   return (
