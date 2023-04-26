@@ -3,11 +3,10 @@ import { TodoContext } from "../context/TodoContext";
 import { TodoContextType } from "../Interface/TodoContextType";
 import { motion } from "framer-motion";
 import TodoItem from "./TodoItem";
+import { TodoItemObjectType } from "../Interface/TodoItem";
 
 function TodoList() {
-  const { todoList, updateItem, deleteItem } = useContext(
-    TodoContext
-  ) as TodoContextType;
+  const { todoList, updateItem } = useContext(TodoContext) as TodoContextType;
 
   const todoListContainer = useRef<HTMLDivElement>(null)!;
 
@@ -49,7 +48,7 @@ function TodoList() {
       className='todo-list'
       ref={todoListContainer}
     >
-      {todoList.map((item: any) => {
+      {todoList.map((item: TodoItemObjectType) => {
         return (
           <TodoItem
             key={item.id}
@@ -57,7 +56,6 @@ function TodoList() {
             data={item.item}
             isCompleted={item.isCompleted}
             updateItem={updateItem}
-            deleteItem={deleteItem}
           />
         );
       })}

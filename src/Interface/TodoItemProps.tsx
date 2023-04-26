@@ -3,5 +3,4 @@ export interface TodoItemProps {
   data: string;
   id: number;
   updateItem: (id: number) => void;
-  deleteItem: (id: number) => void;
 }

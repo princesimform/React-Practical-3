@@ -12,8 +12,13 @@ const TodoProvider = ({ children }: ChildrenNode) => {
   useEffect(() => {
     if (localStorage.getItem("todo") != null) {
       const today = new Date().toLocaleDateString("en-US");
-      const TodayList = JSON.parse(localStorage.getItem("todo")!);
-      TodayList.filter((item: any) => item.date == today).sort(sortTodo());
+      let TodayList = JSON.parse(localStorage.getItem("todo")!);
+
+      TodayList = TodayList.filter(function (item: TodoItemObjectType) {
+        return item.createdAt == today;
+      });
+
+      TodayList.sort(sortTodo());
       setTodoList(TodayList);
       localStorage.setItem("todo", JSON.stringify(TodayList));
     } else {
@@ -22,7 +27,7 @@ const TodoProvider = ({ children }: ChildrenNode) => {
   }, []);
 
   function sortTodo() {
-    return function (a: any, b: any) {
+    return function (a: TodoItemObjectType, b: TodoItemObjectType) {
       if (a.isCompleted) {
         return -1;
       } else {
@@ -56,18 +61,9 @@ const TodoProvider = ({ children }: ChildrenNode) => {
     setTodoList([...tempList]);
   };
 
-  const deleteItem = (id: number) => {
-    const tempList = todoList;
-    const updateItemIndex = tempList.findIndex((item) => item.id == id);
-    tempList.splice(updateItemIndex, 1);
-    console.log(tempList);
-    tempList.sort(sortTodo());
-    localStorage.setItem("todo", JSON.stringify(tempList));
-    setTodoList([...tempList]);
-  };
   return (
     <TodoContext.Provider
-      value={{ todoList, addItem, updateItem, isInvalidData, deleteItem }}
+      value={{ todoList, addItem, updateItem, isInvalidData }}
     >
       {children}
     </TodoContext.Provider>

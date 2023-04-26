@@ -5,7 +5,7 @@ import { TodoItemObjectType } from "../Interface/TodoItem";
 import { TodoContext } from "../context/TodoContext";
 import { TodoContextType } from "../Interface/TodoContextType";
 
-function AddTask() {
+function AddTodo() {
   const { addItem, isInvalidData } = useContext(TodoContext) as TodoContextType;
   const InputField = useRef<HTMLInputElement>(null)!;
 
@@ -83,4 +83,4 @@ function AddTask() {
   );
 }
 
-export default AddTask;
+export default AddTodo;

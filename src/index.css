@@ -231,7 +231,7 @@ abbr {
   background-origin: revert;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover;
+  background-size: contain;
   display: block;
   height: 28rem;
   margin: auto;
