@@ -18,8 +18,6 @@ function TodoList() {
   };
   useEffect(() => {
     if (null != todoListContainer.current) {
-      console.log(todoListContainer.current.scrollHeight);
-
       if (todoListContainer.current.scrollHeight > 432) {
         todoListContainer.current.classList.value =
           "todo-list todo-list-overflow";
