@@ -7,9 +7,9 @@ import TodoProvider from "./context/TodoContext";
 function App() {
   return (
     <div className='App'>
+          <Header />
       <TodoProvider>
         <div className='todo-app-container'>
-          <Header />
           <TodoList />
           <AddTodo />
         </div>
