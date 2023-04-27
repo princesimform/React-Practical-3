@@ -6,7 +6,7 @@ import TodoItem from "./TodoItem";
 import { TodoItemObjectType } from "../Interface/TodoItem";
 
 function TodoList() {
-  const { todoList, updateItem } = useContext(TodoContext) as TodoContextType;
+  const { todoList } = useContext(TodoContext) as TodoContextType;
   const todoListContainer = useRef<HTMLDivElement>(null)!;
   const variants = {
     open: {

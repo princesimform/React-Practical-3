@@ -20,6 +20,7 @@
   --inactive-font-color: #e1e2e6;
   --font-color: #626574;
   --primary-color: #50e3a4;
+  --delete-color: #f06060;
   --secondary-color: #f0efe9;
 }
 
@@ -111,9 +112,11 @@ abbr {
 .item .item-complete,
 .item .add {
   margin: 0 0.5rem;
+  display: flex;
 }
 .item-complete-btn {
   cursor: pointer;
+  margin-left: 0.3rem;
   width: 28px;
   display: block;
   border-radius: 50%;
@@ -125,6 +128,20 @@ abbr {
   background-position: center;
   /* background-attachment: initial; */
   background-size: cover;
+}
+
+.delete-item {
+  cursor: pointer;
+  margin-left: 0.3rem;
+  width: 18px;
+  display: block;
+  border-radius: 50%;
+  height: 18px;
+  font-size: 0.9rem;
+  color: var(--delete-color);
+  border-radius: 50%;
+  border: 2px solid var(--delete-color);
+  padding: 0.2rem;
 }
 
 .todo-name {

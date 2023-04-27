@@ -5,10 +5,12 @@ import { Tooltip } from "react-tooltip";
 import { TodoContext } from "../context/TodoContext";
 import { TodoContextType } from "../Interface/TodoContextType";
 import { TodoItemObjectType } from "../Interface/TodoItem";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDeleteLeft , faTrash} from "@fortawesome/free-solid-svg-icons";
 
 function TodoItem({ todoItem }: { todoItem: TodoItemObjectType }) {
   const todoItemContainer = useRef<HTMLDivElement>(null)!;
-  const { updateItem } = useContext(TodoContext) as TodoContextType;
+  const { updateItem, deleteItem } = useContext(TodoContext) as TodoContextType;
   const variants = {
     open: {
       y: 0,
@@ -34,9 +36,6 @@ function TodoItem({ todoItem }: { todoItem: TodoItemObjectType }) {
         whileHover={{ scale: 0.95 }}
         whileTap={{ scale: 0.95 }}
         className={"item" + `${todoItem.isCompleted ? " item-completed" : ""}`}
-        onClick={() => {
-          updateItem(todoItem.id);
-        }}
         ref={todoItemContainer}
       >
         <div className='todo-name'>
@@ -55,7 +54,24 @@ function TodoItem({ todoItem }: { todoItem: TodoItemObjectType }) {
             damping: 20,
           }}
         >
-          <span className='item-complete-btn'></span>
+          <span
+            className='item-complete-btn'
+            onClick={() => {
+              updateItem(todoItem.id);
+            }}
+          ></span>
+
+          {todoItem.isCompleted && (
+            <span
+              className='delete-item'
+              onClick={() => {
+                deleteItem(todoItem.id);
+              }}
+            >
+              <FontAwesomeIcon icon={faTrash} />
+            </span>
+          )}
+          
         </motion.div>
       </motion.div>
 

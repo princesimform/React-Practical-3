@@ -64,10 +64,19 @@ const TodoProvider = ({ children }: ChildrenNode) => {
     const todoListDom = document.getElementById("todo-list");
     todoListDom?.scrollTo(todoListDom.scrollHeight, 0);
   };
+  const deleteItem = (id: string) => {
+    const tempList = todoList;
+    const updateItemIndex = tempList.findIndex((item) => item.id == id);
+    tempList.splice(updateItemIndex, 1);
+    console.log(tempList);
+    tempList.sort(sortTodo());
+    localStorage.setItem("todo", JSON.stringify(tempList));
+    setTodoList([...tempList]);
+  };
 
   return (
     <TodoContext.Provider
-      value={{ todoList, addItem, updateItem, isInvalidData }}
+      value={{ todoList, addItem, updateItem, deleteItem ,isInvalidData }}
     >
       {children}
     </TodoContext.Provider>
