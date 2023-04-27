@@ -8,8 +8,8 @@ function App() {
   return (
     <div className='App'>
       <TodoProvider>
-          <Header />
         <div className='todo-app-container'>
+          <Header />
           <TodoList />
           <AddTodo />
         </div>
