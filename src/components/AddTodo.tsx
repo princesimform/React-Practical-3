@@ -60,8 +60,9 @@ function AddTodo() {
               name='todoInput'
               value={todoInput}
               onChange={(e) => setTodoInput(e.target.value)}
-              placeholder='Enter Your Task'
+              placeholder='Enter Your Task (max 40 character)'
               ref={InputField}
+              maxLength={40}
             />
             {isInvalidData ? (
               <p className='invalid-data-text'>Invalid Data</p>
