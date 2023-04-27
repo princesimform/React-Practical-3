@@ -24,21 +24,19 @@ function AddTodo() {
       setIsInputActive(false);
     }
   }
-  function submitTask(e: React.KeyboardEvent<HTMLInputElement>) {
-    if (e.key == "Enter") {
-      const date = new Date();
-      let reqData: TodoItemObjectType = {
-        id: Date.now().toString(36) + Math.random().toString(36).substr(2),
-        createdAt: date.toLocaleDateString("en-US"),
-        item: e.currentTarget.value,
-        isCompleted: false,
-      };
-
-      try {
-        addItem(reqData);
-        setTodoInput("");
-      } catch (error) {}
-    }
+  function HandleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    const date = new Date();
+    let reqData: TodoItemObjectType = {
+      id: Date.now().toString(36) + Math.random().toString(36).substr(2),
+      createdAt: date.toLocaleDateString("en-US"),
+      item: todoInput,
+      isCompleted: false,
+    };
+    try {
+      addItem(reqData);
+      setTodoInput("");
+    } catch (error) {}
+    e.preventDefault();
   }
 
   const activeInput = () => {
@@ -52,14 +50,13 @@ function AddTodo() {
     <>
       {isInputActive ? (
         <div className='add-task'>
-          <div className='input-box'>
+          <form className='input-box' onSubmit={HandleSubmit}>
             <input
               className={isInvalidData ? `invalid-data` : ``}
               type='text'
               name='todoInput'
               value={todoInput}
               onChange={(e) => setTodoInput(e.target.value)}
-              onKeyDown={submitTask}
               placeholder='Enter Your Task'
               ref={InputField}
             />
@@ -68,7 +65,7 @@ function AddTodo() {
             ) : (
               <p>&nbsp;</p>
             )}
-          </div>
+          </form>
         </div>
       ) : (
         <div className='add-task add-task-btn'>
