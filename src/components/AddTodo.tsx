@@ -42,9 +42,12 @@ function AddTodo() {
   const activeInput = () => {
     setIsInputActive(true);
     setTodoInput("");
-    if (InputField.current != null) {
-      InputField.current.focus();
-    }
+
+    setTimeout(() => {
+      if (InputField.current != null) {
+        InputField.current.focus();
+      }
+    }, 100);
   };
   return (
     <>
