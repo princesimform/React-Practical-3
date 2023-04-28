@@ -36,23 +36,23 @@ const TodoProvider = ({ children }: ChildrenNode) => {
     };
   }
 
-  const addItem = (newTodoItem: TodoItemObjectType) => {
-    if (newTodoItem.item.trim() == "") {
-      setIsInvalidData(true);
-      setTimeout(() => setIsInvalidData(false), 2000);
-    } else {
-      let newTodoList: TodoItemObjectType[] = [...todoList, newTodoItem];
-      try {
-        localStorage.setItem("todo", JSON.stringify(newTodoList));
-        setTodoList(newTodoList!);
-        const todoListDom = document.getElementById("todo-list");
-        todoListDom?.scrollTo(0, todoListDom.scrollHeight);
-      } catch (error) {
-        setIsInvalidData(true);
-        setTimeout(() => setIsInvalidData(false), 2000);
-      }
-    }
-  };
+  // const addItem = (newTodoItem: TodoItemObjectType) => {
+  //   if (newTodoItem.item.trim() == "") {
+  //     setIsInvalidData(true);
+  //     setTimeout(() => setIsInvalidData(false), 2000);
+  //   } else {
+  //     let newTodoList: TodoItemObjectType[] = [...todoList, newTodoItem];
+  //     try {
+  //       localStorage.setItem("todo", JSON.stringify(newTodoList));
+  //       setTodoList(newTodoList!);
+  //       const todoListDom = document.getElementById("todo-list");
+  //       todoListDom?.scrollTo(0, todoListDom.scrollHeight);
+  //     } catch (error) {
+  //       setIsInvalidData(true);
+  //       setTimeout(() => setIsInvalidData(false), 2000);
+  //     }
+  //   }
+  // };
   const updateItem = (id: string) => {
     const tempList = todoList;
     const updateItemIndex = tempList.findIndex((item) => item.id == id);
@@ -76,7 +76,7 @@ const TodoProvider = ({ children }: ChildrenNode) => {
 
   return (
     <TodoContext.Provider
-      value={{ todoList, addItem, updateItem, deleteItem ,isInvalidData }}
+      value={{ todoList, updateItem, deleteItem ,isInvalidData }}
     >
       {children}
     </TodoContext.Provider>

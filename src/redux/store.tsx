@@ -1,6 +1,9 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 import { TodoItemObjectType } from "../Interface/TodoItem";
-const initialState = { todoList: [], isInvalidData: false };
+const initialState: { todoList: any; isInvalidData: boolean } = {
+  todoList: [],
+  isInvalidData: false,
+};
 
 function sortTodo() {
   return function (a: TodoItemObjectType, b: TodoItemObjectType) {
@@ -12,7 +15,7 @@ function sortTodo() {
   };
 }
 const todoSlice = createSlice({
-  name: "todd",
+  name: "todo",
   initialState,
   reducers: {
     init(state) {
@@ -32,26 +35,42 @@ const todoSlice = createSlice({
       }
     },
     addItem(state, action) {
-      console.log(action.payload);
-
-      if (action.payload.item.trim() == "") {
-        state.isInvalidData = true;
-        setTimeout(() => {
-          state.isInvalidData = false;
-        }, 2000);
-      } else {
+      if (action.payload.item.trim() !== "") {
         state.todoList = state.todoList.concat(action.payload);
         try {
           localStorage.setItem("todo", JSON.stringify(state.todoList));
           const todoListDom = document.getElementById("todo-list");
           todoListDom?.scrollTo(0, todoListDom.scrollHeight);
         } catch (error) {
-          state.isInvalidData = true;
-          setTimeout(() => {
-            state.isInvalidData = false;
-          }, 2000);
+          throw new Error("Invalid");
         }
+      } else {
+        throw new Error("Invalid");
       }
+    },
+    changeValidity(state) {
+      console.log(state.isInvalidData);
+
+      state.isInvalidData = !state.isInvalidData;
+    },
+    updateItem(state, action) {
+      const updateItemIndex = state.todoList.findIndex(
+        (item: any) => item.id == action.payload
+      );
+      state.todoList[updateItemIndex].isCompleted =
+        !state.todoList[updateItemIndex].isCompleted;
+      state.todoList.sort(sortTodo());
+      localStorage.setItem("todo", JSON.stringify(state.todoList));
+      const todoListDom = document.getElementById("todo-list");
+      todoListDom?.scrollTo(todoListDom.scrollHeight, 0);
+    },
+    deleteItem(state, action) {
+      const updateItemIndex = state.todoList.findIndex(
+        (item: any) => item.id == action.payload
+      );
+      state.todoList.splice(updateItemIndex, 1);
+      state.todoList.sort(sortTodo());
+      localStorage.setItem("todo", JSON.stringify(state.todoList));
     },
   },
 });

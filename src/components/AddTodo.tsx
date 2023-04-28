@@ -39,7 +39,13 @@ function AddTodo() {
     try {
       dispatch(todoActions.addItem(reqData));
       setTodoInput("");
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+      dispatch(todoActions.changeValidity());
+      setTimeout(() => {
+        dispatch(todoActions.changeValidity());
+      }, 2000);
+    }
     e.preventDefault();
   }
 
