@@ -4,9 +4,13 @@ import { TodoContextType } from "../Interface/TodoContextType";
 import { motion } from "framer-motion";
 import TodoItem from "./TodoItem";
 import { TodoItemObjectType } from "../Interface/TodoItem";
-
+import { useSelector } from "react-redux";
 function TodoList() {
-  const { todoList } = useContext(TodoContext) as TodoContextType;
+  const { todoList } = useSelector(
+    (state: any) => state.todoList
+  ) as TodoContextType;
+  console.log(todoList);
+
   const todoListContainer = useRef<HTMLDivElement>(null)!;
   const variants = {
     open: {

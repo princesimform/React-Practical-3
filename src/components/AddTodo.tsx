@@ -4,13 +4,17 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { TodoItemObjectType } from "../Interface/TodoItem";
 import { TodoContext } from "../context/TodoContext";
 import { TodoContextType } from "../Interface/TodoContextType";
-
+import { useDispatch } from "react-redux";
+import { todoActions } from "../redux/store";
+import { useSelector } from "react-redux";
 function AddTodo() {
-  const { addItem, isInvalidData } = useContext(TodoContext) as TodoContextType;
+  const isInvalidData = useSelector(
+    (state: any) => state.todoList.isInvalidData
+  );
   const InputField = useRef<HTMLInputElement>(null)!;
   const [isInputActive, setIsInputActive] = useState(false);
   const [todoInput, setTodoInput] = useState("");
-
+  const dispatch = useDispatch();
   useEffect(() => {
     window.addEventListener("keydown", onKeyUp);
 
@@ -33,7 +37,7 @@ function AddTodo() {
       isCompleted: false,
     };
     try {
-      addItem(reqData);
+      dispatch(todoActions.addItem(reqData));
       setTodoInput("");
     } catch (error) {}
     e.preventDefault();
